@@ -21,11 +21,21 @@ css += """.grid{
     display:-ms-grid;
     display:grid;
     -ms-grid-rows:"""
+row_dimensions = []
+column_dimensions = []
 for i in range(rows):
-    css += " 100px"
+    row_dimensions.append(raw_input("row " + str(i + 1) + " height: "))
+    if i == rows - 1:
+        css += row_dimensions[i]
+    else:
+        css += row_dimensions[i] + " "
 css += ";\n    -ms-grid-columns:"
 for i in range(columns):
-    css += " 100px"
+    column_dimensions.append(raw_input("column " + str(i + 1) + " width: "))
+    if i == columns - 1:
+        css += column_dimensions[i]
+    else:
+        css += column_dimensions[i] + " "
 css += ";\n    grid-template:\n"
 for i in range(rows):
     css += "    \""
@@ -35,14 +45,14 @@ for i in range(rows):
         else:
             css += str(i + 1) + "_" + str(j + 1) + "   "
     if i == rows - 1:
-        css += "\" 100px /\n    "
+        css += "\" " + row_dimensions[i] + " /\n    "
     else:
-        css += "\" 100px\n"
+        css += "\" " + row_dimensions[i] + "\n"
 for i in range(columns):
     if i == columns - 1:
-        css += "100px;\n}\n"
+        css += column_dimensions[i] + ";\n}\n"
     else:
-        css += "100px "
+        css += column_dimensions[i] + "   "
 #CSS grid cell spec code.
 for i in range(rows):
     for j in range(columns):
@@ -50,8 +60,8 @@ for i in range(rows):
         css += "    -ms-grid-row: " + str(i + 1) + ";\n"
         css += "    -ms-grid-column: " + str(j + 1) + ";\n"
         css += "    grid-area: " + str(i + 1) + "_" + str(j + 1) + ";\n"
-        css += "    height: 100px;\n"
-        css += "    width: 100px;\n}\n"
+        css += "    height: " + str(row_dimensions[i]) + ";\n"
+        css += "    width:  " + str(column_dimensions[j]) + ";\n}\n"
 #Code to generate all html grid divs.
 grid_divs = ""
 for i in range(rows):
