@@ -15,7 +15,7 @@ css_file_name = "style.css"
 html_file = open(html_file_name, "w")
 css_file = open(css_file_name, "w")
 #Flexbox centering code.
-css = ".centerXY{display:flex;justify-content:center;align-items:center;}\n"
+css = ".centerXY{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}\n"
 #CSS grid areas spec code.
 css += """.grid{
     display:-ms-grid;
@@ -59,6 +59,8 @@ for i in range(rows):
         css += ".cell-" + str(i + 1) + "_" + str(j + 1) + "{\n"
         css += "    -ms-grid-row: " + str(i + 1) + ";\n"
         css += "    -ms-grid-column: " + str(j + 1) + ";\n"
+        css += "    grid-row: " + str(i + 1) + ";\n"
+        css += "    grid-column: " + str(j + 1) + ";\n"
         css += "    grid-area: " + str(i + 1) + "_" + str(j + 1) + ";\n"
         css += "    height: " + str(row_dimensions[i]) + ";\n"
         css += "    width:  " + str(column_dimensions[j]) + ";\n}\n"
@@ -75,7 +77,7 @@ html = """<html>
         <title>Grid Master</title>
         <link rel="stylesheet" type="text/css" href=\"""" + css_file_name + """\">
     </head>
-    <body>
+    <body style="margin:0;padding:0;">
         <div class="grid">
 """ + grid_divs + """
         </div>
